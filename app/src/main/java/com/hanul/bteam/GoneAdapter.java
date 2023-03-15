@@ -19,18 +19,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 
-public class SingerAdapter extends
-        RecyclerView.Adapter<SingerAdapter.ViewHolder>{
+public class GoneAdapter extends
+        RecyclerView.Adapter<GoneAdapter.ViewHolder>{
     private static final String TAG = "main:SingerAdapter";
 
     // 메인에게 넘겨받는것 -> 반드시 : Context, ArrayList<DTO>
     Context context;
-    ArrayList<SingerDTO> dtos;
+    ArrayList<GoneDTO> dtos;
 
     LayoutInflater inflater;
 
     // 생성자로 메인에서 넘겨받은것들을 연결
-    public SingerAdapter(Context context, ArrayList<SingerDTO> dtos) {
+    public GoneAdapter(Context context, ArrayList<GoneDTO> dtos) {
 
         this.context = context;
         this.dtos = dtos;
@@ -41,7 +41,7 @@ public class SingerAdapter extends
     ////////////////////////////////////////////////////
     // 매소드는 여기에 만든다
     // dtos에 dto를 추가하는 매소드
-    public void addDto(SingerDTO dto){
+    public void addDto(GoneDTO dto){
         dtos.add(dto);
     }
 
@@ -56,7 +56,7 @@ public class SingerAdapter extends
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = inflater.inflate(R.layout.singerview,
+        View itemView = inflater.inflate(R.layout.goneview,
                 parent, false);
 
         return new ViewHolder(itemView);
@@ -68,7 +68,7 @@ public class SingerAdapter extends
         Log.d(TAG, "onBindViewHolder: " + position);
 
         // dtos에 있는 데이터를 각각 불러온다
-        SingerDTO dto = dtos.get(position);
+        GoneDTO dto = dtos.get(position);
         // 불러온 데이터를 ViewHolder에 만들어 놓은 setDto를
         // 사용하여 데이터를 셋팅시킨다
         holder.setDto(dto);
@@ -77,19 +77,13 @@ public class SingerAdapter extends
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SingerDTO dto1 = dtos.get(position);
+                GoneDTO dto1 = dtos.get(position);
                 Toast.makeText(context,
-                        "이름 : " + dto1.getName(), Toast.LENGTH_SHORT).show();
+                        "산이름 : " + dto1.getMountin_name(), Toast.LENGTH_SHORT).show();
             }
         });
 
-        // 쓰레기통을 클릭하여 항목 삭제 리스너
-        holder.ivTrash.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showMessage(position);
-            }
-        });
+
 
 
     }
@@ -103,8 +97,8 @@ public class SingerAdapter extends
     // 3. xml 파일에서 사용된 모든 변수를 adapter에서 클래스로 선언한다
     public class ViewHolder extends RecyclerView.ViewHolder{
         // singerview.xml 에서 사용된 모든 위젯을 정의한다
-        TextView tvName, tvPhone;
-        ImageView ivTrash, ivImage;
+
+        ImageView  ivImage;
         LinearLayout parentLayout;
 
         // singerview.xml에서 정의한 아이디를 찾아 연결시킨다(생성자)
@@ -112,16 +106,12 @@ public class SingerAdapter extends
             super(itemView);
 
             parentLayout = itemView.findViewById(R.id.parentLayout);
-            tvName = itemView.findViewById(R.id.tvName);
-            tvPhone = itemView.findViewById(R.id.tvPhone);
             ivImage = itemView.findViewById(R.id.ivImage);
-            ivTrash = itemView.findViewById(R.id.ivTrash);
+
         }
 
         // singerview에 데이터를 연결시키는 매소드를 만든다
-        public void setDto(SingerDTO dto){
-            tvName.setText(dto.getName());
-            tvPhone.setText(dto.getMobile());
+        public void setDto(GoneDTO dto){
             ivImage.setImageResource(dto.getResId());
         }
 

@@ -116,16 +116,7 @@ public class BoardrAdapter extends BaseAdapter {
             }
         });
 
-        // 휴지통 이미지 클릭시 그 항목 삭제하기
-        viewHolder.ivTrash.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 특정위치에 있는 항목 지우기
-                dtos.remove(position);
-                // 화면 갱신해주기
-                notifyDataSetChanged();
-            }
-        });
+
 
         // 만들어진 뷰를 반환
         return convertView;
